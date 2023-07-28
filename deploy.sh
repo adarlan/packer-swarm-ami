@@ -26,5 +26,6 @@ else
     fi
 fi
 if [ $Updated -eq 1 ]; then
-    docker stack deploy --compose-file $DeployFile $StackName
+    docker stack deploy --prune --compose-file $DeployFile $StackName
+    docker system prune --all --force
 fi
