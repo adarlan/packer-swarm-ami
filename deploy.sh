@@ -1,9 +1,11 @@
 #!/bin/bash
 set -e
 
-echo -e "\n$(date)"
+echo -e "\n$(whoami) $(date)"
 
+source /home/ec2-user/.bashrc
 echo "SSMParameterName: $SSMParameterName"
+
 SSMParameterValue=$(aws ssm get-parameter --with-decryption --name $SSMParameterName --query "Parameter.Value" | jq --monochrome-output fromjson)
 echo "SSMParameterValue: $SSMParameterValue"
 
