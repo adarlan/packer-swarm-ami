@@ -2,21 +2,21 @@ packer {
   required_plugins {
     amazon = {
       version = ">= 1.2.6"
-      source = "github.com/hashicorp/amazon"
+      source  = "github.com/hashicorp/amazon"
     }
   }
 }
 
 source "amazon-ebs" "custom-swarm-ami-x86_64" {
-  ami_name      = "custom-swarm-ami-{{timestamp}}-x86_64"
-  region        = "us-east-1"
+  ami_name = "custom-swarm-ami-{{timestamp}}-x86_64"
+  region   = "us-east-1"
   source_ami_filter {
     filters = {
-       virtualization-type = "hvm"
-       name = "al2023-ami-2023.*-x86_64"
-       root-device-type = "ebs"
+      virtualization-type = "hvm"
+      name                = "al2023-ami-2023.*-x86_64"
+      root-device-type    = "ebs"
     }
-    owners = ["137112412989"]
+    owners      = ["137112412989"]
     most_recent = true
   }
   instance_type = "t2.micro"
@@ -24,7 +24,7 @@ source "amazon-ebs" "custom-swarm-ami-x86_64" {
 }
 
 build {
-  name = "my-build"
+  name    = "my-build"
   sources = ["source.amazon-ebs.custom-swarm-ami-x86_64"]
 
   provisioner "shell" {
